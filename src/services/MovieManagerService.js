@@ -1,4 +1,4 @@
-import { FILMGROUPID } from "util/settings/config";
+import { FILMGROUPID } from "../utils/config";
 import { BaseService } from "./BaseService";
 
 export class MovieManagerService extends BaseService {
