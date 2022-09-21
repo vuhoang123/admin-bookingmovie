@@ -17,7 +17,7 @@ function App() {
       <Router history={history}>
         {/* <Loading /> */}
         <Switch>
-          <AdminLandingPage path="/admin" exact Component={DashBoard} />
+          <AdminLandingPage path="/" exact Component={Films} />
           <AdminLandingPage path="/admin/films" exact Component={Films} />
           <AdminLandingPage
             path="/admin/films/addnew"
