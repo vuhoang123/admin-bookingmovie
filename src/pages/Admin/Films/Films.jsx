@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Table } from "antd";
 import { Input } from "antd";
+import "./Film.scss";
 import {
   EditOutlined,
   DeleteOutlined,
@@ -11,8 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteMovieAction,
   fetchMoviesAction,
-} from "../../../redux/actions/action";
-// import "./Films.scss";
+} from "../../../redux/actions/MovieManagerAction";
+
 import { debounce } from "lodash";
 
 const { Search } = Input;
@@ -43,6 +44,7 @@ export default function Films(props) {
             className="imageMovie mx-auto"
             src={text}
             alt={films.tenPhim}
+            style={{ width: 100, height: 100 }}
             onError={(e) => {
               e.target.onError = null;
               e.target.src = `https://picsum.photos/id/${index}/70/70`;
@@ -64,7 +66,7 @@ export default function Films(props) {
         return nameFilmA > nameFilmB;
       },
       sortDirections: ["descend"],
-      width: "20%",
+      width: "30%",
     },
     {
       title: "Description",
@@ -74,7 +76,7 @@ export default function Films(props) {
           {film.moTa.length > 50 ? film.moTa.substr(0, 50) + "..." : film.moTa}
         </>
       ),
-      width: "25%",
+      width: "30%",
     },
     {
       title: "Action",
@@ -83,7 +85,7 @@ export default function Films(props) {
         <>
           <NavLink
             key={1}
-            className=" text-indigo-800 mr-2 text-2xl"
+            className=" text-cyan-600 mr-2 text-2xl"
             to={`/films/edit/${film.maPhim}`}
           >
             <EditOutlined />
@@ -104,7 +106,7 @@ export default function Films(props) {
           <NavLink
             key={3}
             className=" text-lime-700 ml-2 text-2xl"
-            to={`/films/showtime/${film.maPhim}`}
+            to={`/films/showtime/${film.maPhim}?name=${film.tenPhim}`}
           >
             <CalendarOutlined />
           </NavLink>
@@ -114,13 +116,6 @@ export default function Films(props) {
   ];
   const data = moviesDefault;
 
-  // const onSearch = (value) => {
-  //   //call api
-  //   dispatch(fetchMoviesAction(value));
-  // };
-
-  //delay search with useDebounce :>>
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceSearch = useCallback(
     debounce((value) => dispatch(fetchMoviesAction(value)), 500),
     []
@@ -135,12 +130,13 @@ export default function Films(props) {
 
   useEffect(() => {
     dispatch(fetchMoviesAction());
+    // dispatch(getAccessTokenAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="container mx-auto Films text-center">
-      <h1 className="w-44 p-1 text-indigo-800 font-semibold rounded-md mt-2 text-2xl mb-4 ">
+      <h1 className="w-44 p-1 text-indigo-800 font-semibold rounded-md mt-2 text-2xl mb-4 text-center">
         Movie Manager
       </h1>
       <Search
@@ -151,14 +147,21 @@ export default function Films(props) {
       <Button
         className="addMovie"
         onClick={() => {
-          props.history.push("/admin/films/addnew");
+          props.history.push("/films/addnew");
           props.setSelectedKey("2");
           localStorage.setItem("keyMenu", "2");
         }}
       >
         Add Movie
       </Button>
-      <Table columns={columns} dataSource={data} rowKey={"maPhim"} />
+      <Table
+        pagination={{ pageSize: 5 }}
+        // loading={<Spin />}
+        columns={columns}
+        dataSource={data}
+        rowKey={"maPhim"}
+        bordered
+      />
     </div>
   );
 }

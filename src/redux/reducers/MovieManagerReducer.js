@@ -1,4 +1,4 @@
-import { SET_MOVIES, SET_MOVIE_INFO } from "../types";
+import { SET_CINEMA, SET_CINEPLEX, SET_MOVIES, SET_MOVIE_INFO } from "../types";
 
 const initialState = {
   lstFilm: [
@@ -19,9 +19,9 @@ const initialState = {
     },
   ],
   lstFilmDefault: [],
-  filmIsPlaying: true,
-  filmUpComing: true,
   movieInfo: {},
+  cinema: [],
+  cineplex: [],
 };
 
 export const MovieManagerReducer = (state = initialState, action) => {
@@ -34,6 +34,15 @@ export const MovieManagerReducer = (state = initialState, action) => {
 
     case SET_MOVIE_INFO: {
       state.movieInfo = action.payload;
+      return { ...state };
+    }
+    case SET_CINEMA: {
+      state.cinema = action.payload;
+      return { ...state };
+    }
+
+    case SET_CINEPLEX: {
+      state.cineplex = action.payload;
       return { ...state };
     }
     default: {

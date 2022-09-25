@@ -1,13 +1,13 @@
 import { FILMGROUPID } from "../utils/config";
 import { BaseService } from "./BaseService";
 
-export class MovieManagerService extends BaseService {
-  constructor() {
-    super();
-  }
+class MovieManagerService extends BaseService {
+  // constructor() {
+  //   super();
+  // }
 
-  getListBanner = () => {
-    return this.get(`/api/QuanLyPhim/LayDanhSachBanner`);
+  getAccessToken = (account) => {
+    return this.post("/api/QuanLyNguoiDung/DangNhap", account);
   };
 
   fetchMovies = (nameMovie = "") => {
@@ -29,6 +29,22 @@ export class MovieManagerService extends BaseService {
   };
   deleteMovie = (id) => {
     return this.delete(`/api/QuanLyPhim/XoaPhim?maPhim=${id}`);
+  };
+
+  getCinemaInfo = (cinemaID) => {
+    return this.get(
+      `/api/QuanLyRap/LayThongTinHeThongRap?maHeThongRap=${cinemaID}`
+    );
+  };
+
+  getCineplexInfo = (cinemaID) => {
+    return this.get(
+      `/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${cinemaID}`
+    );
+  };
+
+  createShowtimes = (formData) => {
+    return this.post(`/api/QuanLyDatVe/TaoLichChieu`, formData);
   };
 }
 

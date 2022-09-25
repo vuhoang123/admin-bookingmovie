@@ -4,8 +4,8 @@ import {
   DesktopOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  FileOutlined,
   VideoCameraAddOutlined,
+  UserAddOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 // import logo from "assets/adminLogo.jpg";
@@ -38,7 +38,7 @@ export const AdminLandingPage = (props) => {
   const operations = (
     <Fragment>
       <h1 className="text-indigo-100 text-center font-bold text-2xl pt-4">
-        Admin BookingMovie
+        Admin
       </h1>
     </Fragment>
   );
@@ -52,8 +52,7 @@ export const AdminLandingPage = (props) => {
           <Fragment>
             <Layout className="adminTemplate">
               <Sider
-                theme="light"
-                className="sider mr-3"
+                className="sider"
                 collapsible
                 collapsed={collapsed}
                 onCollapse={(value) => setCollapsed(value)}
@@ -66,24 +65,33 @@ export const AdminLandingPage = (props) => {
                     setSelectedKey(e.key.toString());
                     localStorage.setItem("keyMenu", e.key.toString());
                   }}
-                  theme="light"
+                  theme="dark"
                   mode="inline"
                   defaultSelectedKeys={["1"]}
                   selectedKeys={selectedKey}
                 >
-                  <Menu.Item key="1" icon={<UserOutlined />}>
-                    <NavLink to="/admin/users">Users</NavLink>
-                  </Menu.Item>
+                  <Menu.SubMenu
+                    key="sub2"
+                    icon={<UserOutlined />}
+                    title="User Manager"
+                  >
+                    <Menu.Item key="3" icon={<UserOutlined />}>
+                      <NavLink to="/users">Users</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="4" icon={<UserAddOutlined />}>
+                      <NavLink to="/users/addnew">Add user</NavLink>
+                    </Menu.Item>
+                  </Menu.SubMenu>
                   <Menu.SubMenu
                     key="sub1"
                     icon={<DesktopOutlined />}
                     title="Films"
                   >
                     <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                      <NavLink to="/admin/films">Films</NavLink>
+                      <NavLink to="/films">Films</NavLink>
                     </Menu.Item>
                     <Menu.Item key="3" icon={<VideoCameraAddOutlined />}>
-                      <NavLink to="/admin/films/addnew">Add new</NavLink>
+                      <NavLink to="/films/addnew">Add new</NavLink>
                     </Menu.Item>
                   </Menu.SubMenu>
 
@@ -93,10 +101,10 @@ export const AdminLandingPage = (props) => {
                 </Menu>
               </Sider>
               <Layout className="site-layout">
-                <Header className="header site-layout-background bg-indigo-500 mb-2 ml-2">
+                <Header className="header site-layout-background">
                   {operations}
                 </Header>
-                <Content className="site-layout-background content m-2 p-3 bg-indigo-100">
+                <Content className="site-layout-background content p-3 ">
                   {
                     <Component
                       setSelectedKey={setSelectedKey}

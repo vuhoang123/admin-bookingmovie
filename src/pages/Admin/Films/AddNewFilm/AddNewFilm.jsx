@@ -4,10 +4,10 @@ import { useFormik } from "formik";
 import moment from "moment";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { addMovieByUploadImageAction } from "../../../../redux/actions/action";
+import { addMovieByUploadImageAction } from "../../../../redux/actions/MovieManagerAction";
 import { FILMGROUPID } from "../../../../utils/config";
 import { useHistory } from "react-router-dom";
-
+import "../Film.scss";
 const schema = yup.object().shape({
   tenPhim: yup.string().required("*Trường này bắt buộc nhập"),
   trailer: yup.string().required("*Trường này bắt buộc nhập"),
@@ -21,7 +21,7 @@ export default function Addnew(props) {
   const history = useHistory();
 
   const AddNewsuccess = () => {
-    history.push("/admin/films");
+    history.push("/films");
   };
 
   const formik = useFormik({
@@ -88,8 +88,8 @@ export default function Addnew(props) {
   };
 
   return (
-    <div className="Addnew container align-left">
-      <h3 className="title w-40 p-1 text-indigo-800 rounded-md">
+    <div className="Addnew container align-left text-start">
+      <h3 className="title w-44 p-1 text-indigo-800 font-semibold rounded-md mt-2 text-2xl mb-4">
         Add new movie
       </h3>
       <Form

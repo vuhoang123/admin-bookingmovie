@@ -1,13 +1,12 @@
 .adminTemplate {
-    min-height: 100vh;
-    .sider {
+  min-height: 100vh;
+  .sider {
+  }
+
+  .site-layout {
+    .header {
     }
-  
-    .site-layout {
-      .header {
-      }
-      .content {
-  
-      }
+    .content {
     }
   }
+}
