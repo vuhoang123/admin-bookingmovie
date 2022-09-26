@@ -52,14 +52,12 @@ export const AdminLandingPage = (props) => {
           <Fragment>
             <Layout className="adminTemplate">
               <Sider
+                theme="dark"
                 className="sider"
                 collapsible
                 collapsed={collapsed}
                 onCollapse={(value) => setCollapsed(value)}
               >
-                <div className="logo p-5">
-                  {/* <img src={logo} alt="logo" /> */}
-                </div>
                 <Menu
                   onClick={(e) => {
                     setSelectedKey(e.key.toString());
@@ -69,7 +67,22 @@ export const AdminLandingPage = (props) => {
                   mode="inline"
                   defaultSelectedKeys={["1"]}
                   selectedKeys={selectedKey}
+                  defaultOpenKeys={["sub1", "sub2"]}
                 >
+                  {/* movie */}
+                  <Menu.SubMenu
+                    key="sub1"
+                    icon={<DesktopOutlined />}
+                    title="Movie Manager"
+                  >
+                    <Menu.Item key="1" icon={<VideoCameraOutlined />}>
+                      <NavLink to="/films">Movies</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="2" icon={<VideoCameraAddOutlined />}>
+                      <NavLink to="/films/addnew">Add movie</NavLink>
+                    </Menu.Item>
+                  </Menu.SubMenu>
+                  {/* user */}
                   <Menu.SubMenu
                     key="sub2"
                     icon={<UserOutlined />}
@@ -82,22 +95,6 @@ export const AdminLandingPage = (props) => {
                       <NavLink to="/users/addnew">Add user</NavLink>
                     </Menu.Item>
                   </Menu.SubMenu>
-                  <Menu.SubMenu
-                    key="sub1"
-                    icon={<DesktopOutlined />}
-                    title="Films"
-                  >
-                    <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                      <NavLink to="/films">Films</NavLink>
-                    </Menu.Item>
-                    <Menu.Item key="3" icon={<VideoCameraAddOutlined />}>
-                      <NavLink to="/films/addnew">Add new</NavLink>
-                    </Menu.Item>
-                  </Menu.SubMenu>
-
-                  {/* <Menu.Item key="4" icon={<DesktopOutlined />}>
-                    <NavLink to="/admin/showtimes">Showtime</NavLink>
-                  </Menu.Item> */}
                 </Menu>
               </Sider>
               <Layout className="site-layout">
